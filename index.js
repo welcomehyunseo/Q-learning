@@ -41,17 +41,7 @@ class Q_Matrix {  //Q values matrix is 3d array
     }
 }
 
-class Agent {
-    
-    constructor(current_row_i, current_col_i) {
-        this.current_row_i = current_row_i;
-        this.current_col_i = current_col_i;
-    }
-}
-
 class E_Matrix {  //environment matrix is 2d array
-    action = ['up', 'right', 'down', 'left'];
-
     r_map = [  //this is reward_map
         [-100, -100, -100, -100, -100, 100, -100, -100, -100, -100, -100],
         [-100,   -1,   -1,   -1,   -1,  -1,   -1,   -1,   -1,   -1, -100],
@@ -64,7 +54,8 @@ class E_Matrix {  //environment matrix is 2d array
         [-100, -100, -100,   -1, -100, -100, -100,   -1, -100, -100, -100],
         [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
         [-100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100]
-    ]
+    ];
+
     constructor() {
         this.e_rows = this.r_map[1].length;
         this.e_cols = this.r_map.length;
@@ -100,6 +91,17 @@ class E_Matrix {  //environment matrix is 2d array
     get_next_location(action_index);
 }
 
+class Agent {
+    action = ['up', 'right', 'down', 'left'];
+
+    constructor(current_row_i, current_col_i) {
+        this.E = new E_Matrix();
+        //this.E.print_shape();
+        this.current_row_i = current_row_i;
+        this.current_col_i = current_col_i;
+    }
+}
+
 class Q_Learning {
     constructor(e_rows, e_cols) {
         this.e_rows = e_rows;
@@ -108,8 +110,7 @@ class Q_Learning {
     }
 
     init() {
-        this.E = new E_Matrix();
-        //this.E.print_shape();
+        
         this.Q = new Q_Matrix(
             11, 11, 0
         );
